@@ -1,29 +1,47 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Input, Spinner, Card, CardSection, Button } from './common';
-import firebase from 'firebase';
+import { app, postsRef } from '../../firebase.js'
 
 export default class LoginForm extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            email:'',
-            password:'',
+            email:'mahesh9415@gmail.com',
+            password:'12345678',
             error:''
-            // this.onEmailTextChange=onEmailTextChange.bind(this);
     }
     this.onLoginSubmit=this.onLoginSubmit.bind(this);
+    this.getPosts=this.getPosts.bind(this);
 }
 
-
+getPosts(){
+          postsRef.orderByChild('category')
+            .on("value", (data) => {
+            console.log(data.val());
+            })
+          return
+      
+}
 onLoginSubmit(){
     const {email, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .catch(()=>{
-            firebase.auth().createUserWithEmailAndPassword(email, password)
-                .catch((data)=>{
-                    this.setState({error:data});
-                })
+    app.auth().signInWithEmailAndPassword(email, password)
+        .then((user)=>{
+        console.log(user);
+        this.getPosts();
+         })
+        .catch((data)=>{
+            console.log(data);
+            this.setState({error:data.message});
+        })
+}
+
+onSignUpSubmit(){
+    const {email, password } = this.state;
+    app.auth().createUserWithEmailAndPassword(email, password)
+        .catch((data)=>{
+            console.log(data);
+            this.setState({error:data});
         })
 }
 
@@ -72,7 +90,8 @@ const styles = StyleSheet.create({
     },
     ErrorText:{
         color:'red',
-        alignSelf:'center'
+        alignSelf:'center',
+        paddingHorizontal:30
         // justifyContent:'center'
     }
 })
