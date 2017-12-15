@@ -7,8 +7,8 @@ postsRef.orderByChild('category')
           .on("value", (data) => {
               console.log("invoked from actions");
               dispatch({
-                  type: C.FEED_POSTS,
-                  payload:data
+                  type: C.FETCH_POSTS,
+                  payload:data.val()
               });
           })
 }

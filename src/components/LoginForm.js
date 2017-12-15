@@ -18,7 +18,6 @@ export default class LoginForm extends Component{
 getPosts(){
           postsRef.orderByChild('category')
             .on("value", (data) => {
-            console.log(data.val());
             })
           return
       
@@ -27,11 +26,9 @@ onLoginSubmit(){
     const {email, password } = this.state;
     app.auth().signInWithEmailAndPassword(email, password)
         .then((user)=>{
-        console.log(user);
         this.getPosts();
          })
         .catch((data)=>{
-            console.log(data);
             this.setState({error:data.message});
         })
 }
@@ -40,7 +37,6 @@ onSignUpSubmit(){
     const {email, password } = this.state;
     app.auth().createUserWithEmailAndPassword(email, password)
         .catch((data)=>{
-            console.log(data);
             this.setState({error:data});
         })
 }

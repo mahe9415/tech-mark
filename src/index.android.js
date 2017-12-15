@@ -1,5 +1,5 @@
 import React, { Components, Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import { Header } from './components/common';
 import LoginForm from './components/LoginForm.js';
 import { listPosts } from './actions.js';
@@ -17,11 +17,11 @@ export default class Dashboard extends Component{
     }
     render(){
         return(
-            <View>
+            <ScrollView>
             <Header headerText="Curated Blog posts" />
             <LoginForm />
             <Posts />
-            </View>
+            </ScrollView>
         );
     }
 }

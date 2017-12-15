@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-
+import ListItem from './ListItem';
 
 class Posts extends Component {
     constructor(){
-        super()
-        this.getListItem=this.getListItem.bind(this);
+        super();
+        // this.getListItem=this.getListItem.bind(this);
+        // this.generateListItem=this.generateListItem.bind(this);
     }
     componentWillMount(){
-        // setInterval(()=>  console.log(this.props,"from post component"),2000)
-      
+        // setInterval(()=>  console.log(this.props.posts),5000)
     }
   
     // category
@@ -34,35 +34,39 @@ class Posts extends Component {
     // url
     // :
     // "https://medium.freecodecamp.org/25-new-android-libraries-which-you-definitely-want-to-try-at-the-beginning-of-2017-45878d5408c0?source=false---------0"
-    getListItem(item){
+    getListItem = (item=this.props.posts) => {
         console.log(item)
-        if(item.length <= 0){
+        console.log(typeof(this.props.posts));
+        if(!item){
+            console.log("no item")
+            console.warn(this.props.posts);
            return (<Text>{" No List item" }</Text>);
         }
         else{
+            console.log("item exits")
             return (
                 <View>
-            <Text> {item.url} </Text>
+            <Text> {item.category} </Text>
             <Text> {item}</Text>
             </View>
             );
         }
     }
+
+    generateListItem = postArray =>
+    <ListItem postArray={postArray}/>
+
     render() {
         return (
             <View>
-               <FlatList
-          data={this.props.posts}
-          extraData={this.props.posts}
-          renderItem={this.getListItem}
-        />
-            </View>
+           <ListItem style={{flex:1}} listItem={this.props.posts} /> 
+           </View>
         );
     }
 }
 
 const mapStateToProps = state => ({
-      posts:state.feedLists.posts
+      posts:state.posts.postArray
 })
 
 
