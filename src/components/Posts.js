@@ -58,9 +58,9 @@ class Posts extends Component {
 
     render() {
         return (
-            <View>
+            <ScrollView>
            <ListItem style={{flex:1}} listItem={this.props.posts} /> 
-           </View>
+           </ScrollView>
         );
     }
 }

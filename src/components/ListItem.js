@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, Image, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { Card, CardSection } from './common/CardSection';
-
+import { setWebURL } from '../actions.js'
+import store from '../store'
 
 export default class ListItem extends Component {
     
@@ -22,7 +23,7 @@ export default class ListItem extends Component {
                 {item.category}
             </Text>
             </CardSection>
-                <TouchableOpacity onPress={ () => { console.log("hello"); } } key={ item } style={{flex:1}}>
+                <TouchableOpacity onPress={ () => { store.dispatch(setWebURL(item.url)) } } key={ item } style={{flex:1}}>
                 <Image source={{uri: item.thumbnail}}
                 key={item.thumbnail}     
                 style={{flex:1 ,height:300, paddingHorizontal:10}} />

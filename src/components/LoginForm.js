@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Input, Spinner, Card, CardSection, Button } from './common';
-import { app, postsRef } from '../../firebase.js'
+import { app, postsRef } from '../../firebase.js';
+import { LoginSuccess } from '../actions.js';
+import storeFactory from '../store'
 
 export default class LoginForm extends Component{
     constructor(props) {
@@ -23,13 +25,14 @@ getPosts(){
       
 }
 onLoginSubmit(){
+      store.dispatch(LoginSuccess())
     const {email, password } = this.state;
     app.auth().signInWithEmailAndPassword(email, password)
         .then((user)=>{
         this.getPosts();
          })
         .catch((data)=>{
-            this.setState({error:data.message});
+            // this.setState({error:data.message});
         })
 }
 

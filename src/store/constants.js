@@ -5,7 +5,9 @@ const constants = {
     FETCH_POSTS:"FETCH_POSTS",
     FEED_POSTS:"FEED_POSTS",
     EMPTY_LIST:"EMPTY_LIST",
-    ERROR:"ERROR"
+    ERROR:"ERROR",
+    LOCGIN_SUCCESS:"LOCGIN_SUCCESS",
+    SET_WEB_URL:"SET_WEB_URL"
 }
 
 export default constants;
