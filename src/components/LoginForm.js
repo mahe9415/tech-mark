@@ -13,6 +13,7 @@ export default class LoginForm extends Component{
             password:'12345678',
             error:''
     }
+    
     this.onLoginSubmit=this.onLoginSubmit.bind(this);
     this.getPosts=this.getPosts.bind(this);
 }
@@ -24,8 +25,9 @@ getPosts(){
           return
       
 }
+
 onLoginSubmit(){
-      store.dispatch(LoginSuccess())
+        store.dispatch(LoginSuccess())
     const {email, password } = this.state;
     app.auth().signInWithEmailAndPassword(email, password)
         .then((user)=>{
@@ -46,7 +48,7 @@ onSignUpSubmit(){
 
     render(){
     return (
-        <View>
+        <View style={{flex:1}}>
         <Card>
             <CardSection>
                 <Input 

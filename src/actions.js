@@ -21,7 +21,6 @@ export const setWebURL = url => dispatch =>{
 		url
 	})
 	Actions.web()
-
 }
 
 export const LoginSuccess = value=> dispatch =>{
