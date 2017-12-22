@@ -23,19 +23,18 @@ getPosts(){
             .on("value", (data) => {
             })
           return
-      
 }
 
 onLoginSubmit(){
         store.dispatch(LoginSuccess())
-    const {email, password } = this.state;
-    app.auth().signInWithEmailAndPassword(email, password)
-        .then((user)=>{
-        this.getPosts();
-         })
-        .catch((data)=>{
-            // this.setState({error:data.message});
-        })
+        const {email, password } = this.state;
+        app.auth().signInWithEmailAndPassword(email, password)
+            .then((user)=>{
+            this.getPosts();
+             })
+            .catch((data)=>{
+                // this.setState({error:data.message});
+            })
 }
 
 onSignUpSubmit(){

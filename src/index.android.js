@@ -6,16 +6,13 @@ import { listPosts } from './actions.js';
 import Posts from './components/Posts.js';
 import storeFactory from './store';
 import RouterComponent from './Router.js'
-
+import { Font } from 'expo';
 const store = storeFactory;
 
 export default class Dashboard extends Component{
-    componentWillMount(){
-        store.dispatch(
-         listPosts('all')
-        );
-    }
-    render(){
+
+
+     render(){
         return(
             <RouterComponent />
         );
