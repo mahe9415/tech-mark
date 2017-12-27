@@ -4,8 +4,9 @@ import { Input, Spinner, Card, CardSection, Button } from './common';
 import { app, postsRef } from '../../firebase.js';
 import { LoginSuccess } from '../actions.js';
 import storeFactory from '../store'
+import { connect } from 'react-redux';
 
-export default class LoginForm extends Component{
+ class LoginForm extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -16,6 +17,12 @@ export default class LoginForm extends Component{
     
     this.onLoginSubmit=this.onLoginSubmit.bind(this);
     this.getPosts=this.getPosts.bind(this);
+}
+async componentWillMount(){
+    if(this.props.is_login){
+        console.log(this.props.is_login)
+        await this.props.LoginSuccess()
+    }
 }
 
 getPosts(){
@@ -81,6 +88,13 @@ onSignUpSubmit(){
 }
 }
 
+const mapStateToProps = store =>{
+    is_login: store.is_login
+}
+const mapDispatchToProps = dispatch =>{
+    LoginSuccess: ()=> dispatch(LoginSuccess(true))
+}
+
 const styles = StyleSheet.create({
     wrapView:{
         flex:1
@@ -95,3 +109,7 @@ const styles = StyleSheet.create({
         // justifyContent:'center'
     }
 })
+
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(LoginForm);

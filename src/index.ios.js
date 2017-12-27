@@ -9,11 +9,6 @@ import RouterComponent from './Router.js'
 import Posts from './components/Posts.js'
 
 export default class Dashboard extends Component{
-	    componentWillMount(){
-        store.dispatch(
-         listPosts('all')
-        );
-    }
     render(){
         return(
         	<RouterComponent/>

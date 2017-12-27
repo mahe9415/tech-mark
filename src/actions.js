@@ -17,6 +17,8 @@ export const listPosts = async (dispatch) => {
           })
 }
 
+
+
 export const setWebURL = url => dispatch =>{
 	dispatch({
 		type:C.SET_WEB_URL,
@@ -53,6 +55,7 @@ export const Login = (email,password) => dispatch =>{
 
 
 export const LoginSuccess = value=> dispatch =>{
+	console.log("from actions loginn success");
 	Actions.posts()
 }
 

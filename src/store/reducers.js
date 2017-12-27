@@ -4,7 +4,6 @@ import { combineReducers } from 'redux';
 
 export const is_login  = ( state=null, action ) => {
     if(action.type == C.LOGGED_IN){
-        console.log(action)
         state = true;
         return state
     }
@@ -33,7 +32,6 @@ export const error = ( state ={}, action ) => {
 
 export const user = ( state={}, action ) => {
     if(action.type == C.SET_USER_DATA){
-        console.log(action)
         return Object.assign({},state,{
             state:action.payload
         })

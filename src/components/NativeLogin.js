@@ -7,6 +7,7 @@ import { LoginSuccess, is_fetching, Login } from '../actions.js';
 import storeFactory from '../store';
 
 class NativeLogin extends Component {
+
 	    constructor(props) {
         super(props);
         this.state = {
@@ -14,11 +15,19 @@ class NativeLogin extends Component {
             password:'12345678',
             error:''
     }
-    
+
     	this.onLoginSubmit=this.onLoginSubmit.bind(this);
     	this.getPosts=this.getPosts.bind(this);
       // setInter
 	}
+
+
+    async componentWillMount(){
+              console.log(this.props.is_login)
+    if(this.props.is_login){
+        await this.props.LoginSuccess()
+    }
+} 
 	onLoginSubmit(){
     this.props.LoginMe(this.state.email,this.state.password)
 		}
@@ -68,7 +77,8 @@ fromStore:state.fromStore
 })
 
 const mapDispatchToProps = dispatch =>  ({
-        LoginMe: (email,password) => dispatch(Login(email,password))
+        LoginMe: (email,password) => dispatch(Login(email,password)),
+        LoginSuccess: ()=> dispatch( LoginSuccess() )
     })
 
 

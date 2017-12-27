@@ -5,7 +5,8 @@ import { View, ScrollView, Image, StyleSheet, Alert, TouchableOpacity } from 're
 
 // import  store from '../store';
 import { Container, Header, Content , Form,  Input, Button, Text, ListView, List, ListItem, Icon } from 'native-base';
-import _ from 'lodash'
+import _ from 'lodash';
+import { setWebURL } from '../actions.js';
 
 export class NativeListView extends Component{
 	constructor(props){
@@ -15,8 +16,7 @@ export class NativeListView extends Component{
 
 	 _generate_card(item){
 	 return <ListItem>
-	 	<Text>{item.url}</Text>
-	 	                <TouchableOpacity onPress={ () => { store.dispatch(setWebURL(item.url)) } } key={ item } style={{flex:1}}>
+	 	                <TouchableOpacity onPress={ () => { this.props.setWebURL(item.url)  } } key={ item } style={{flex:1}}>
                 <Image source={{uri: item.thumbnail}}
                 key={item.thumbnail}     
                 style={{flex:1 ,height:300, paddingHorizontal:10}} />
@@ -37,7 +37,6 @@ export class NativeListView extends Component{
     );
 	};
 
-	
 }
 	const styles = {
     wrapView:{
@@ -58,10 +57,13 @@ export class NativeListView extends Component{
 }
 
 
-mapStateToProps = state =>({
+const mapStateToProps = state =>({
  	listItems:state.posts.postArray[0]
 })
 
 
+const mapDispatchToProps = dispatch =>  ({
+        setWebURL: (url) => dispatch(setWebURL(url))
+    })
 
-export default connect(mapStateToProps)(NativeListView);
+export default connect(mapStateToProps,mapDispatchToProps)(NativeListView);
